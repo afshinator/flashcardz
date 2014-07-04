@@ -5,7 +5,7 @@
 
 ![alt text](./img/screenshot.jpg "screen shot")
 
-- Live preview [here](http://htmlpreview.github.io/?https://github.com/afshinator/)
+- Live preview [here](http://htmlpreview.github.io/?https://github.com/afshinator/flashcardz/blob/master/index.html)
 
 
 Allows the user to create flashcards, categorize them, 
