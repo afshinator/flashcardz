@@ -33,6 +33,11 @@
 	}
 
 
+	.purple { color: #99469d; }
+	.orange { color: #d7811e; }
+	.blue { color: #0297cb;}
+
+
 /*** Card sets tree & username display */
 	#username {
 		font-weight: bold;
@@ -49,8 +54,12 @@
 		text-align: right;
 	}
 
-	#options :nth-child(1) {
-		margin-right: 5%;
+	#options a {
+		margin-left: 4%;
+	}
+
+	#options span {
+		margin-left: 5%;
 	}
 
 	#cardPane {
@@ -65,4 +74,9 @@
 
 	#back {
 		margin-top: 30px;
+	}
+
+	#newCardOptions {
+		margin-top: 30px;
+		text-align: right;
 	}

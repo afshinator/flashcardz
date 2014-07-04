@@ -5,23 +5,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Quick n dirty flashcards in the browser.">
+    <meta name="author" content="Afshin Mokhtari">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Flashcardz</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
     <link href="./css/flashcardz.css" rel="stylesheet">
 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -67,8 +66,12 @@
 
             <div id = "cardContainer" class="col-xs-12 col-sm-9">
                 <div id = "options">
-                    <a href="#" target="_blank">Edit card</a>
-                    <a href="#" target="_blank">Quiz</a> 
+                    <a href="#" class="blue">New card</a>
+                    <a href="#" class="orange">Edit card</a>
+                    <span>|</span>                     
+                    <a href="#" class="purple">New set</a>                
+                    <span>|</span>                   
+                    <a href="#">Quiz</a> 
                 </div>
 
                 <hr>
@@ -79,6 +82,12 @@
                     <div id = "front" class= "card rounded1" >front contents</div>
                     <hr>
                     <div id = "back" class="card rounded1" >back contents</div>
+                    <div id = "newCardOptions">
+                        <div class="alert alert-dismissable alert-info">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          Select and click on a flashcard on the left.
+                        </div>
+                    </div>
                 </div>
 
             </div><!--cardContainer-->
@@ -103,9 +112,9 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/bootstrap-treeview.min.js"></script>
 
-    <script src="./js/loStorage.min.js"></script>
+    <script src="./js/loStorage.min.js"></script>           <!-- localStore library:  https://github.com/js-coder/loStorage.js -->
 
-    <script src="./js/app.js"></script> 
+    <script src="./js/app.js"></script>                     
     <script src="./js/fcards.js"></script>
     <script src="./js/views.js"></script>
     <script src="./js/persist.js"></script>

@@ -133,6 +133,10 @@ var fcardz = (function ($, my) {
 
 
 
+    /* getSeedData1 - 
+        In case there's nothing in localStorage, fill up the app
+        with this seed data, for now.
+     */
     function getSeedData1() {
         var data = 
             [
@@ -140,15 +144,27 @@ var fcardz = (function ($, my) {
                     set: 'Deep Thoughts',
                     user: 'Afshin',
                     title: 'Zen',
-                    front: { text: '<h1>What really <i>is</i> the question?</h1>' },
-                    back: { text: '<strong>A: To be or not to be.</strong>' }
+                    value: 2,
+                    front: { text: '<h1 class="text-warning">What really <i>is</i> the question?</h1>' },
+                    back: { text: '<strong>A: To be or not to be.</strong><p>According to Christopher Heumann, an 18th-century scholar, pseudo-philosophy has six characteristics:</p><ol>'
+                        + '<li>A preference for useless speculation</li>'
+                        + '<li>It appeals merely to human authority</li>'
+                        + '<li>It appeals to tradition instead to reason</li>'
+                        + '<li>It syncretises philosophy with superstition</li>'
+                        + ' <li>It has a preference for obscure and enigmatic language and symbolism</li>'
+                        + '<li>It is immoral</li>'
+                        + '</ol>' }
                 },
                 {
                     set: 'Deep Thoughts',
                     user: 'Afshin',
                     title: 'Pecking wood',
+                    value: 5,
                     front: { text: '<h2>How much wood would a woodpecker peck if a woodpecker could peck wood?</h2>' },
-                    back: { text: '<strong>A: w = pecks per minute * minutes spent pecking</strong>' }
+                    back: { text: '<img src="http://0.tqn.com/d/birding/1/G/-/E/-/-/pileated.jpg" style="float:right; margin: 5px" alt="pileated woody">'
+                        + '<strong>A: pecks per minute * minutes spent pecking</strong>' 
+                        + '<p>Many of the foraging, breeding and signaling behaviors of woodpeckers involve drumming and hammering using the bill. To prevent brain damage from the rapid and repeated impacts, woodpeckers have evolved a number of adaptations to protect the brain. These include small brain size, the orientation of the brain within the skull (which maximises the area of contact between the brain and the skull) and the short duration of contact. The millisecond before contact with wood a thickened nictitating membrane closes, protecting the eye from flying debris. The nostrils are also protected; they are often slit-like and have special feathers to cover them. Woodpeckers are capable of repeated pecking on a tree at high decelerations on the order of 10,000 m/s<sup>2</sup> (1000 g).</p>'
+                        }
                 },
                 {
                     set: 'The departed',
@@ -163,7 +179,7 @@ var fcardz = (function ($, my) {
                     title: 'Globar vars',
                     front: { text: "<h1>What are global variables? How are they declared? What are the problems with using globals?</h1>" },
                     back: { text: "<p>Most JavaScript developers avoid globals.One reason why is they're "
-                        + "averse to naming conflicts between local and globals,</p>"
+                        + "averse to naming conflicts between local and globals,</p><p class='text-danger'>Have a looksy:</p>"
                         + '<pre>function doSomething() {<br>  this.style.color = "#cc0000";<br>}</pre>'
                          }
                 },                  
@@ -185,9 +201,9 @@ var fcardz = (function ($, my) {
                 {
                     set: 'Things to Know',
                     user: 'Sally',
-                    title: 'Colors',
-                    front: { text: '<p>How many primary colors? </p>' },
-                    back: { text: '<i>Google it!</i>' }
+                    title: 'Excitement',
+                    front: { text: '<p class="text-success"><h1>What is there to get excited about here?</h1>' },
+                    back: { text: '<h3>The beauty of this...</h3><p class="text-info">Is that I can insert arbitary HTML.</p>' }
                 },
             ];
 

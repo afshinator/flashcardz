@@ -26,6 +26,7 @@ var fcardz = (function ($, my) {
         var $cardPane = $( '#cardPane' );
         var $front = $cardPane.find( '#front' );
         var $back = $cardPane.find( '#back' );
+        var $newCardOptions = $cardPane.find( '#newCardOptions');
 
 
         // Set up handling clicks on the 'Show front side only' checkbox
@@ -44,11 +45,13 @@ var fcardz = (function ($, my) {
         var showCard = function ( cardIndex ) {
             $front.html( my.cardManager.getFrontText( cardIndex ) );
             $back.html ( my.cardManager.getBackText( cardIndex ) );
+            $newCardOptions.css('display', 'none');
         };
 
         var clear = function() {
             $front.html('');
             $back.html('');
+            $newCardOptions.css('display', 'block');
         };
 
         return {
@@ -109,7 +112,9 @@ var fcardz = (function ($, my) {
         $treeContainer.on('nodeSelected', function(event, node) {
             console.log ( 'Tree node pressed :' + node.text );
 
-            my.cardsView.showCard( my.cardManager.getIndex( node.text ) );
+            if ( node.icon.indexOf('flash') !== -1 ) {                  // Only show card contents when click is on fcard
+                my.cardsView.showCard( my.cardManager.getIndex( node.text ) );
+            }
         });
 
 
