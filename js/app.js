@@ -24,18 +24,6 @@ var fcardz = (function ($, my) {
 
     // GLOBAL CONSTANTS
     var DEFAULT_QUIZ_VALUE = 1;         // Used for quiz scoring 
-    var bUseSeedData = true;            // Whether to use hardcoded data if there is nothing in localStorage
-
-
-    /*
-        userManager - Keeps track of who the current user is, and what 
-            to do if a new user is selected.
-    */
-    var userManager = function() {
-
-
-    };
-
 
 
     /*
@@ -58,7 +46,39 @@ var fcardz = (function ($, my) {
     }
 
 
+    /*
+        userManager - Keeps track of who the current user is, and if the current user 
+            changes, it updates the display of flashcards.
+    */
+    my.userManager = function() {
+        var currentUser = '';
+        var allUsers = [];                                  // Will hold a list of strings
 
+        var setCurrentUser = function( who ) {
+            currentUser = who;
+
+            my.treeView.viewUsersCards( currentUser, my.cardManager.getAllCards() );   // Show all fcards for newly selected user
+        };
+
+
+        var getCurrentUser = function( who ) {
+            return currentUser;
+        };
+
+
+        var setAllUsers = function( all ) {
+            allUsers = all;
+            my.usersListView.setAllUsers( allUsers );
+        };
+
+
+        return {
+            setAllUsers: setAllUsers,
+            setCurrentUser : setCurrentUser,
+            getCurrentUser : getCurrentUser
+        };
+
+    }();
 
 
 

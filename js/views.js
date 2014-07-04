@@ -54,22 +54,44 @@ var fcardz = (function ($, my) {
 
     /* 
         usersListView - Manages showing the list of users.  Also sets up handler for selecting a different user.
-
     */
     my.usersListView = function() {
         var $userList = $( '#user-list' );
 
-        $( '.dropdown-menu li' ).on( 'click', function( event ) {
-            console.log( 'event handler for users menu selection called ' + $(this).text() );
-            event.preventDefault();
-        });
+        var reset = function() {
+            $( '.dropdown-menu li' ).on( 'click', function( event ) {
+                console.log( 'users menu : ' + $(this).text() );
+                event.preventDefault();
+
+                my.userManager.setCurrentUser( $(this).text() );
+                my.treeView.viewUsersCards( $(this).text(), my.cardManager.getAllCards() );
+            });
+        };
+
+        var setAllUsers = function( userList ) {
+            if ( userList.length > 0 ) {
+                $userList.empty();
+            }
+
+            for ( var i = 0; i < userList.length; i++ ){
+                $userList.append( '<li><a href="#">' + userList[i] + '</a></li>' );
+            }
+
+            reset();
+        };
+
+
+        return {
+            setAllUsers : setAllUsers
+        };
 
     }();
 
 
 
     /*
-        treeView() - Manages the tree showing sets of fcards, the user associated with the sets.
+        treeView() - Manages showing the sets and flashcards in the tree on the sidebar,
+            also delegates clicks on one of the fcards.
 
     */
 
@@ -80,7 +102,11 @@ var fcardz = (function ($, my) {
         // set up event handler for clicks in treebox
         $treeContainer.on('nodeSelected', function(event, node) {
             console.log ( 'node pressed ' + node.text );
+
+            my.cardsView.showCard( my.cardManager.getIndex( node.text ) );
         });
+
+
 
 
         var viewUsersCards = function( username, cardList ){
