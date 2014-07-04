@@ -58,7 +58,7 @@ var fcardz = (function ($, my) {
             currentUser = who;
 
             my.treeView.viewUsersCards( currentUser, my.cardManager.getAllCards() );   // Show all fcards for newly selected user
-            
+            my.cardsView.clear();
         };
 
 

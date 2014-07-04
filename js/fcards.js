@@ -180,7 +180,7 @@ var fcardz = (function ($, my) {
                     user: 'Dick',
                     title: 'E. S. Grant',
                     front: { text: 'Who is buried in Grants tomb?' },
-                    back: { text: 'who knows.' }
+                    back: { text: '<h1>Mr. Hu is buried in Grants tomb!</h1><p>He was a railroad worker.</p>' }
                 },
                 {
                     set: 'Things to Know',
