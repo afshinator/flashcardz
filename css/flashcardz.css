@@ -1,3 +1,8 @@
+/*
+    Flashcardz - by Afshin Mokhtari
+
+    .css     - App styles, separate from bootstrap stuff of course.
+*/
 
 
 /*** Treeview */
@@ -6,9 +11,9 @@
 		cursor: pointer;
 	}
 
-	/*.list-group-item:hover {
+	.list-group-item:hover {
 	  background-color: #f5f5f5;
-	}*/
+	}
 
 	span.indent {
 		margin-left: 10px;
@@ -38,6 +43,7 @@
 	.blue { color: #0297cb;}
 
 
+
 /*** Card sets tree & username display */
 	#username {
 		font-weight: bold;
@@ -48,19 +54,10 @@
 
 
 /*** Card Container and contents */
-
-	#options {
-		font-weight: bold;
-		text-align: right;
+	#cardContainer {
+		margin-top: 20px;
 	}
 
-	#options a {
-		margin-left: 4%;
-	}
-
-	#options span {
-		margin-left: 5%;
-	}
 
 	#cardPane {
 		background: #f4f4f4;

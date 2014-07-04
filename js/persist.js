@@ -1,33 +1,19 @@
 /*
- 
-    storage.js    - Saving and retrieving all the flashcards (to localStorage),
-                    If there is no pre-saved data, seed app with some starter data.
+    Flashcardz - by Afshin Mokhtari
 
-
-    Please first read my conventions / terminology / description in app.js.
+    persist.js      - Saving and Retrieving all the fcards to localStorage.
 
 */
-
-
 
 var fcardz = (function ($, my) {
 
     'use strict';
 
-    my.test = storage.get('fcardz');
-
-
-
-    /*
-        Check to see if localStorage is available,
-        if so, load in saved flashcards
-        if not, or if nothing saved, seed app with some hardcoded data
-    */
 
     my.store = function() {
         var bSupportsLocalStorage;
 
-        // Check to see if we have access to localStorage
+        // Check to see if browser supports localStorage
         var supports_html5_storage = function() {
             try {
                 return 'localStorage' in window && window['localStorage'] !== null;
@@ -38,13 +24,16 @@ var fcardz = (function ($, my) {
         };
 
 
-        // First thing we do is check localstorage and get the data if there is any
+        // First thing we do is check localstorage and get the data,
+        // send that data to CardManager.
         var init = function() {
             var data;
 
             bSupportsLocalStorage = supports_html5_storage();
 
-            if ( bSupportsLocalStorage ) { data = storage.get( 'fcardz' ); }
+            if ( bSupportsLocalStorage ) { 
+                data = storage.get( 'fcardz' );         // storage courtesy of https://github.com/js-coder/loStorage.js
+            }
 
             my.cardManager.setAllCards( data );
         };

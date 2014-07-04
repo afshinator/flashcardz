@@ -1,29 +1,18 @@
 /*
- 
-    Please first read my conventions / terminology / description :
+    Flashcardz - by Afshin Mokhtari
 
-        Flashcardz can have multiple users,
-        each user can have multiple sets of flashcards.
-        Flashcards have two sides, a front and a back,
-        You enter the contents of what you're trying to learn on the front,
-        either some text, HTML, or url reference, (more to come?) 
-        And you put the contents of what amounts to as the answer,in the back.
+    app.js      - Object.create() polyfill and the user manager 
 
 
-        fcards     - flashcards, I use it in comments.
-        _varName    - underscroed var names are essentially the private variables of the object they are created in.
-
+    The applications 'starts' when my.store.init() in persist.js checks localStorage for app data,
+    that data consisting of all fcards which contain info about their associated users and sets,
+    is sent to the cardManager in fcards.js; which sets up the users and messages to view everything.
+    
 */
-
-
 
 var fcardz = (function ($, my) {
 
     'use strict';
-
-
-    // GLOBAL CONSTANTS
-    var DEFAULT_QUIZ_VALUE = 1;         // Used for quiz scoring 
 
 
     /*
@@ -47,8 +36,10 @@ var fcardz = (function ($, my) {
 
 
     /*
-        userManager - Keeps track of who the current user is, and if the current user 
-            changes, it updates the display of flashcards.
+        userManager - Keeps track of all the users, who the current user is;
+                     When the current user changes, it messages to get fcards
+                     to send to views to show cards; and also messages view to
+                     update the Users menu.
     */
     my.userManager = function() {
         var currentUser = '';

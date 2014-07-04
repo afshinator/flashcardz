@@ -1,7 +1,8 @@
 /*
- 
-    Please first read my conventions / terminology / description in app.js.
+    Flashcardz - by Afshin Mokhtari
 
+    fcards.js      - Manages flashcards data structs, creation and use, 
+                    also seed data for app.
 */
 
 
@@ -13,44 +14,44 @@ var fcardz = (function ($, my) {
     /* 
         'content' object will hold all the stuff that we'll be able to put on
         one side of a flashcard.    A flashcard has two of these objects.
-
-        Minimal stuff in here right now, but ready to be filled with goodness!
     */
     var content = {
-        text : '',
-        url : ''
+        text : '',              // This can be filled with plain text, or HTML 
+        url : ''                // TODO: more stuff?
     };
 
 
 
+    /*
+        cardManager - Deals with creating flashcards and storing, retrieving all its data
+                which includes information about the user and set associated with each fcard.
+
+    */
     my.cardManager = function() {
         var _allCards = [];                                     // Will hold all fcards
-
+        var DEFAULT_QUIZ_VALUE = 1; 
 
         var modifyFcard = function ( fcard, props ) {
             for (var prop in props) {
-                if (fcard.hasOwnProperty(prop)) {
-                    fcard.prop = props.prop;
-                }
+                fcard.prop = props.prop;
             }
         };
 
 
+        /* makeNewFcard - Make new fcard, add it to the list. 
+            props passed in via parameter can hold values to use or defaults are used for value and title.
+            Returns index in _allCards[] to newly created fcard.
+         */
         var makeNewFcard = function( props ) {
             var flashcard = {};
-            var newLength = 0;
+            var newLength = 0;                              // once new fcard is saved _allCards, will hold length of _allCards list
 
             // Each fcard has a front and a back side
             flashcard.front = Object.create( content );
-            flashcard.back = Object.create( content );
+            flashcard.back = Object.create( content );      
 
-            // Each fcard has a rating used for grading quizzes
-            if ( ! props.value ) { props.value = DEFAULT_QUIZ_VALUE; }
-
-            // Each fcard has a title
-            if ( ! props.title ) { props.title = "default"; }
-
-            // TODO: initialize defaults for sets and user ??
+            if ( ! props.value ) { props.value = DEFAULT_QUIZ_VALUE; }           // Each fcard has a rating used for grading quizzes
+            if ( ! props.title ) { props.title = "default"; }                   // Each fcard has a title
 
             modifyFcard( flashcard, props );                // Add all the properties passed in
  
@@ -60,9 +61,8 @@ var fcardz = (function ($, my) {
         };
 
 
-
         var getFrontText = function( index ){
-            return _allCards[ index ].front.text;
+            return _allCards[ index ].front.text;           // Dig into fcards front contents, return it
         };
 
         var getBackText = function( index ) {
@@ -70,7 +70,8 @@ var fcardz = (function ($, my) {
         };
 
 
-        var getAllUsers = function() {
+        // Go through all fcards and return a list of all users
+        var getAllUsers = function() {                      
             var result = [];
             for ( var i = 0; i < _allCards.length; i++ ) {
                 if ( result.indexOf( _allCards[i].user ) === -1 ) {
@@ -82,6 +83,11 @@ var fcardz = (function ($, my) {
         }
 
 
+        /* Used to fill up the user list;  either with real data if localstorage has some,
+            or seed data if not.  
+            Messages User manager to give it all usernames and set current user to first one in the list.
+            Sends Tree view message to display this users sets and cards.
+        */
         var setAllCards = function( data ) {
             var everyUser = [];
 
@@ -102,7 +108,7 @@ var fcardz = (function ($, my) {
 
 
         var getAllCards = function( ) {
-            return _allCards;1
+            return _allCards;
         };
 
 
@@ -134,8 +140,7 @@ var fcardz = (function ($, my) {
 
 
     /* getSeedData1 - 
-        In case there's nothing in localStorage, fill up the app
-        with this seed data, for now.
+        The card manager will use this to seed the app if there is nothing in localStorage.
      */
     function getSeedData1() {
         var data = 
@@ -145,7 +150,7 @@ var fcardz = (function ($, my) {
                     user: 'Afshin',
                     title: 'Zen',
                     value: 2,
-                    front: { text: '<h1 class="text-warning">What really <i>is</i> the question?</h1>' },
+                    front: { text: '<h1 class="text-warning">True of False: Superman was born on Trypkon?</h1>' },
                     back: { text: '<strong>A: To be or not to be.</strong><p>According to Christopher Heumann, an 18th-century scholar, pseudo-philosophy has six characteristics:</p><ol>'
                         + '<li>A preference for useless speculation</li>'
                         + '<li>It appeals merely to human authority</li>'
@@ -171,7 +176,7 @@ var fcardz = (function ($, my) {
                     user: 'Afshin',
                     title: 'E. S. Grant',
                     front: { text: '<h1>Who is buried in Grants tomb?</h1>' },
-                    back: { text: '<strong>who knows.</strong>' }
+                    back: { text: 'I told you, <strong>Mr. Hu.</strong>' }
                 },
                 {
                     set: 'javascript',

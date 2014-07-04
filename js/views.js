@@ -1,12 +1,11 @@
 /*
- 
-    views.js    - All the UI specific code is in here
+    Flashcardz - by Afshin Mokhtari
 
-
-    Please first read my conventions / terminology / description in app.js.
-
+    view.js      - All UI and interaction code should be in here.
+                    There is a cardView that deals with showing fcards and handling the checkbox, 
+                    there is a userListView that manages the top nav menu Users dropdown,
+                    a tree View that manages parsing fcard list data to show the sidebar tree
 */
-
 
 
 var fcardz = (function ($, my) {
@@ -99,9 +98,10 @@ var fcardz = (function ($, my) {
 
 
     /*
-        treeView() - Manages showing the sets and flashcards in the tree on the sidebar,
+        treeView() - Manages showing the sets and fcard in the tree on the sidebar,
             also delegates clicks on one of the fcards.
 
+            The 'bootstrap-treeview' comes courtesy of https://github.com/jonmiles/bootstrap-treeview
     */
 
     my.treeView = function() {
@@ -119,14 +119,17 @@ var fcardz = (function ($, my) {
 
 
 
-
+        // Display this users fcard info into the tree.   
+        // Has to parse the cardList to make a data structure the treeview understands.
+        // TODO:  Needs refactoring.  The code here is written to keep my head clear about the details of
+        //  the algorithm;  not for efficiency or terseness.
         var viewUsersCards = function( username, cardList ){
             var thisUsersCards = [];
 
             $username.text( username + "'s cards:" );                   // Show user associated with sets, and their fcards
 
 
-            // First just get a list of all this users cards
+            // First just get a list of all user passed in's cards in thisUsersCards
             for ( var i = 0; i < cardList.length; i++ ) {
                 if ( cardList[ i ].user === username ) {
                     thisUsersCards.push( cardList[ i ] );
@@ -135,7 +138,7 @@ var fcardz = (function ($, my) {
 
             var sortedBySet = {};
 
-            // Now just create an empty list for each Set
+            // Now just create an empty list for each set in sortedBySet
             for ( i = 0; i < thisUsersCards.length; i++ ) {
                 sortedBySet[ thisUsersCards[ i ].set ] = [];     
             }
@@ -145,21 +148,22 @@ var fcardz = (function ($, my) {
                 sortedBySet[ thisUsersCards[ i ].set ].push( thisUsersCards[ i ].title );     
             }
 
-            // SortedBySet is now an object for this user, keys are the sets, values are an array of flashcard titles.
+            // SortedBySet is now an object that, for this user, keys are the sets names, 
+            // values are an array of flashcard titles.
 
-            // Now to turn sortedBySet into an object the tree widget can chew on.
+            // Now to turn sortedBySet into an object the tree widget can chew on
             var displayable = [];
             var tempObj = {};
 
-            for ( var key in sortedBySet ) {
-                tempObj.text = key;
-                tempObj.icon = "glyphicon glyphicon-folder-close";
-                tempObj.nodes = [];
+            for ( var key in sortedBySet ) {            // for each set
+                tempObj.text = key;                     // the name of the sets (folders)
+                tempObj.icon = "glyphicon glyphicon-folder-close";  // bootsstrap folder icon
+                tempObj.nodes = [];             // for attached fcards to this set
 
                 for ( i = 0; i < sortedBySet[ key ].length; i++ ) {
                     tempObj.nodes.push( { 
-                            text: sortedBySet[ key ][ i ],
-                            icon: "glyphicon glyphicon-flash"
+                            icon: "glyphicon glyphicon-flash",
+                            text: sortedBySet[ key ][ i ]
                         } );
                 }
 
