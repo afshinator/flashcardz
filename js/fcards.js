@@ -62,7 +62,6 @@ var fcardz = (function ($, my) {
 
 
         var getFrontText = function( index ){
-            console.log(' the index to get: ' + index );
             return _allCards[ index ].front.text;
         };
 
@@ -111,11 +110,9 @@ var fcardz = (function ($, my) {
         */
         var getIndexOfCurrentUsersCard = function( title ) {
             var currentUser = my.userManager.getCurrentUser();
-console.log(' current user ' + currentUser);
 
             for ( var i = 0;  i < _allCards.length; i++ ) {
                 if ( _allCards[ i ].user === currentUser && _allCards[ i ].title === title ) {
-                    console.log('found i');
                     return i;
                 }
             }
@@ -187,7 +184,7 @@ console.log(' current user ' + currentUser);
                 },
                 {
                     set: 'Things to Know',
-                    user: 'Harry',
+                    user: 'Sally',
                     title: 'Colors',
                     front: { text: '<p>How many primary colors? </p>' },
                     back: { text: '<i>Google it!</i>' }

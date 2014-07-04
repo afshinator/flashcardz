@@ -31,22 +31,29 @@ var fcardz = (function ($, my) {
         // Set up handling clicks on the 'Show front side only' checkbox
         $('#checkbox-front-only').change(function() {
             bShowFrontOnly = $( this ).is( ':checked' );
-            console.log( 'bShowFrontOnly : ' + bShowFrontOnly ); 
+            console.log( 'bShowFrontOnly : ' + bShowFrontOnly );
+            if ( bShowFrontOnly ) {
+                $back.css('display', 'none');
+            } else {
+                $back.css('display', 'block');
+            }
         });
 
 
 
         var showCard = function ( cardIndex ) {
             $front.html( my.cardManager.getFrontText( cardIndex ) );
-
-            if ( ! bShowFrontOnly ) {
-                $back.html ( my.cardManager.getBackText( cardIndex ) );
-            }
+            $back.html ( my.cardManager.getBackText( cardIndex ) );
         };
 
+        var clear = function() {
+            $front.html('');
+            $back.html('');
+        };
 
         return {
-            showCard : showCard
+            showCard : showCard,
+            clear : clear
         }
     }();
 
@@ -64,7 +71,6 @@ var fcardz = (function ($, my) {
                 event.preventDefault();
 
                 my.userManager.setCurrentUser( $(this).text() );
-                my.treeView.viewUsersCards( $(this).text(), my.cardManager.getAllCards() );
             });
         };
 
@@ -101,7 +107,7 @@ var fcardz = (function ($, my) {
 
         // set up event handler for clicks in treebox
         $treeContainer.on('nodeSelected', function(event, node) {
-            console.log ( 'node pressed ' + node.text );
+            console.log ( 'Tree node pressed :' + node.text );
 
             my.cardsView.showCard( my.cardManager.getIndex( node.text ) );
         });
